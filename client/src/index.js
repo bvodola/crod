@@ -1,7 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+import { AppContainer as HotLoader} from 'react-hot-loader'
+import AppContainer from './containers/AppContainer.jsx';
+
+import Meteor from 'react-meteor-client';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+Meteor.connect('ws://localhost:2000/websocket');
+injectTapEventPlugin();
+
+const render = Component => {
+  ReactDOM.render(
+    <HotLoader>
+      <Component />
+    </HotLoader>,
+    document.getElementById('root')
+  )
+}
+
+render(AppContainer);
+
+if (module.hot) {
+  module.hot.accept('./containers/AppContainer.jsx', () => { render(AppContainer) })
+}

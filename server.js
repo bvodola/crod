@@ -16,7 +16,7 @@ const server = http.createServer(app);
 // ===============
 const Schema = mongoose.Schema;
 mongoose.Promise = global.Promise;
-const mongoosePromise = mongoose.connect('MONGO_URL', {useMongoClient: true});
+const mongoosePromise = mongoose.connect('mongodb://bvodola:qZwX1001@ds049754.mlab.com:49754/crodity', {useMongoClient: true});
 mongoosePromise.catch((reason) => {console.log(reason)});
 
 // =======
